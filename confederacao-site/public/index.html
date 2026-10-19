@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confederação Brasileira Cannabica Xamaniáca</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="auth-bg">
+  <main class="auth-card">
+    <div class="brand">
+      <div class="leaf">🌿</div>
+      <h1>Confederação Brasileira<br />Cannabica Xamaniáca</h1>
+      <p class="subtitle">Área exclusiva para membros</p>
+    </div>
+
+    <div class="tabs">
+      <button id="tab-login" class="tab active">Entrar</button>
+      <button id="tab-register" class="tab">Pedir acesso</button>
+    </div>
+
+    <!-- LOGIN -->
+    <form id="form-login" class="form">
+      <label>Usuário
+        <input name="username" autocomplete="username" required />
+      </label>
+      <label>Senha
+        <input name="password" type="password" autocomplete="current-password" required />
+      </label>
+      <button type="submit" class="btn">Entrar</button>
+    </form>
+
+    <!-- CADASTRO -->
+    <form id="form-register" class="form hidden">
+      <label>Nome de exibição
+        <input name="displayName" placeholder="Como você aparece no grupo" required />
+      </label>
+      <label>Usuário
+        <input name="username" autocomplete="username" required />
+      </label>
+      <label>Senha (mínimo 6 caracteres)
+        <input name="password" type="password" autocomplete="new-password" minlength="6" required />
+      </label>
+      <button type="submit" class="btn">Enviar pedido ao dono</button>
+      <p class="hint">Seu acesso será liberado após o dono do site aprovar o pedido.</p>
+    </form>
+
+    <p id="auth-msg" class="msg"></p>
+  </main>
+  <script src="/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vídeos — Confederação Cannabica Xamaniáca</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body data-page="videos">
+  <div class="layout">
+    <aside id="sidebar"></aside>
+    <div class="main-col">
+      <div id="banner"></div>
+      <main class="content">
+        <h2 class="page-title">🎥 Galeria de Vídeos</h2>
+        <div class="uploader">
+          <h3>Enviar novo vídeo</h3>
+          <form id="form-video" class="upload-form">
+            <input type="file" name="file" accept="video/*" required />
+            <input type="text" name="caption" placeholder="Legenda (opcional)" maxlength="300" />
+            <button class="btn" type="submit">Enviar vídeo</button>
+          </form>
+          <div class="progress hidden" id="video-progress">Enviando…</div>
+        </div>
+        <div id="grid-videos" class="grid"></div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/features.js"></script>
+  <script src="/js/page-videos.js"></script>
+  <script src="/js/layout.js"></script>
+</body>
+</html>

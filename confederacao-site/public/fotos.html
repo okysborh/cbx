@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fotos — Confederação Cannabica Xamaniáca</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body data-page="fotos">
+  <div class="layout">
+    <aside id="sidebar"></aside>
+    <div class="main-col">
+      <div id="banner"></div>
+      <main class="content">
+        <h2 class="page-title">📸 Galeria de Fotos</h2>
+        <div class="uploader">
+          <h3>Enviar nova foto</h3>
+          <form id="form-photo" class="upload-form">
+            <input type="file" name="file" accept="image/*" required />
+            <input type="text" name="caption" placeholder="Legenda (opcional)" maxlength="300" />
+            <button class="btn" type="submit">Enviar foto</button>
+          </form>
+          <div class="progress hidden" id="photo-progress">Enviando…</div>
+        </div>
+        <div id="grid-photos" class="grid"></div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/features.js"></script>
+  <script src="/js/page-fotos.js"></script>
+  <script src="/js/layout.js"></script>
+</body>
+</html>
