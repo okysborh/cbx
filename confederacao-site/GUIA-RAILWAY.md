@@ -64,17 +64,32 @@ O Railway pega o código a partir do GitHub (um "cofre" de projetos online).
 
 ---
 
-## Passo 4 — ⚠️ IMPORTANTE: armazenamento permanente (Volume)
+## Passo 4 — ⚠️ IMPORTANTE: armazenamento permanente (Volume no `/data`)
 
 Sem isso, **toda vez que o site reiniciar, as fotos, vídeos e contas somem!**
-Para guardar tudo de verdade, adicione um "Volume":
+Para guardar tudo de verdade, você precisa criar um "Volume" — que é como um
+HD permanente para o seu app. Isso é feito **dentro do painel do Railway**
+(eu não consigo criar por você, mas é rapidinho). Siga assim:
 
-1. No seu serviço, clique com o botão direito (ou no menu **+**) e escolha
-   **Add Volume** (adicionar volume).
-2. No campo de caminho (**Mount Path**), coloque exatamente: `/data`
-3. Confirme. (Esse `/data` é o mesmo valor que você pôs em `STORAGE_DIR`.)
+1. No painel do projeto, **clique no quadradinho do seu serviço** (o app).
+2. Agora há duas formas (use a que aparecer na sua tela):
+   - **Forma A (botão direito):** clique com o **botão direito do mouse** em
+     cima do quadradinho do serviço → escolha **Attach Volume** ou
+     **Add Volume** (anexar/adicionar volume).
+   - **Forma B (menu):** com o serviço aberto, procure o botão **Create** ou
+     o ícone **+** no canto, e escolha **Volume**.
+3. Vai aparecer um campo pedindo o **Mount Path** (caminho de montagem).
+   Digite exatamente: `/data`
+4. Clique em **Add** / **Create** para confirmar.
+5. O Railway vai reiniciar o app. Pronto! Esse `/data` é o mesmo valor que
+   você colocou em `STORAGE_DIR` no Passo 3 — por isso tudo se conecta.
 
-Agora fotos, vídeos e cadastros ficam salvos de forma permanente. ✅
+> ✅ A partir de agora, fotos, vídeos e cadastros ficam salvos de forma
+> permanente, mesmo que o site reinicie ou receba atualizações.
+>
+> 💡 Dica: se você já tinha enviado fotos ANTES de criar o Volume, elas podem
+> ter sido perdidas no último reinício. A partir da criação do Volume, isso
+> não acontece mais.
 
 ---
 
@@ -97,6 +112,40 @@ Agora fotos, vídeos e cadastros ficam salvos de forma permanente. ✅
 4. Você, logado como dono, entra na aba **“⭐ Pedidos”** e clica em **Aprovar**.
 
 Pronto! Site no ar e só para quem você deixar entrar. 🌿
+
+---
+
+## Passo 7 — Atualizar o site (subir esta versão nova)
+
+Você recebeu uma versão **melhorada** do site. Para o Railway publicar as
+novidades, basta mandar os arquivos novos para o mesmo GitHub — o Railway
+republica sozinho:
+
+1. Descompacte o novo `confederacao-site.zip`.
+2. Entre no seu repositório no GitHub (`okysborh/cbx`).
+3. Clique em **Add file** → **Upload files**.
+4. Arraste **todos os arquivos de dentro da pasta** `confederacao-site`
+   (pode arrastar tudo; o GitHub substitui os que mudaram).
+   - ⚠️ Não precisa enviar `node_modules`.
+5. Desça a página e clique em **Commit changes**.
+6. O Railway detecta a mudança e republica em 1-2 minutos. Atualize o site. ✅
+
+> Suas fotos, vídeos e contas **não se perdem** nessa atualização, porque ficam
+> guardadas no Volume `/data` (Passo 4), separadas do código.
+
+---
+
+## ✨ Novidades desta versão
+
+- ❤️ **Curtidas** nas fotos e vídeos.
+- 💬 **Comentários em cada foto/vídeo** (além do mural geral).
+- 🔍 **Tela cheia** ao clicar numa foto/vídeo, com curtidas e comentários ali.
+- 🗂️ **Álbuns** e **busca** por legenda/autor nas galerias.
+- 👤 **Página "Meu perfil"**: avatar (emoji), bio e **troca de senha**.
+- 🔔 **Aviso de pedidos** pendentes no menu do dono (bolinha vermelha).
+- 🌓 **Modo claro/escuro** (botão no menu lateral).
+- 📱 **Instalável no celular** (abre em "Adicionar à tela inicial" como um app).
+- 🌿 **Banner novo** com arte temática.
 
 ---
 

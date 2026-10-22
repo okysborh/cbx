@@ -39,6 +39,8 @@ const OWNER_PASS = process.env.OWNER_PASS || 'trocar-esta-senha';
       role: 'owner', // owner = conta premium / administrador
       plan: 'premium',
       status: 'approved',
+      avatar: '🌿',
+      bio: '',
       createdAt: new Date().toISOString(),
     });
     db.saveUsers(users);
@@ -131,6 +133,8 @@ app.post('/api/register', (req, res) => {
     role: 'member',
     plan: 'free',
     status: 'pending', // <-- precisa de aprovacao do dono
+    avatar: '🌱',
+    bio: '',
     createdAt: new Date().toISOString(),
   });
   db.saveUsers(users);
@@ -160,6 +164,11 @@ app.post('/api/logout', (req, res) => {
 app.get('/api/me', (req, res) => {
   const u = currentUser(req);
   if (!u) return res.json({ user: null });
+  // Para o dono: quantos pedidos de acesso estao esperando aprovacao.
+  let pendingCount = 0;
+  if (u.role === 'owner') {
+    pendingCount = db.getUsers().filter((x) => x.status === 'pending').length;
+  }
   res.json({
     user: {
       id: u.id,
@@ -168,8 +177,48 @@ app.get('/api/me', (req, res) => {
       role: u.role,
       plan: u.plan,
       status: u.status,
+      avatar: u.avatar || '🌱',
+      bio: u.bio || '',
+      pendingCount,
     },
   });
+});
+
+// ---- Atualizar o proprio perfil (nome, avatar, bio) ----
+app.post('/api/me/profile', requireMember, (req, res) => {
+  const { displayName, avatar, bio } = req.body || {};
+  const users = db.getUsers();
+  const u = users.find((x) => x.id === req.user.id);
+  if (!u) return res.status(404).json({ error: 'Usuario nao encontrado.' });
+  if (typeof displayName === 'string' && displayName.trim()) {
+    u.displayName = displayName.trim().slice(0, 60);
+  }
+  if (typeof avatar === 'string' && avatar.trim()) {
+    // guarda no maximo alguns caracteres (um emoji)
+    u.avatar = Array.from(avatar.trim()).slice(0, 2).join('');
+  }
+  if (typeof bio === 'string') {
+    u.bio = bio.trim().slice(0, 200);
+  }
+  db.saveUsers(users);
+  res.json({ ok: true });
+});
+
+// ---- Trocar a propria senha ----
+app.post('/api/me/password', requireMember, (req, res) => {
+  const { currentPassword, newPassword } = req.body || {};
+  if (!newPassword || String(newPassword).length < 6) {
+    return res.status(400).json({ error: 'A nova senha precisa ter ao menos 6 caracteres.' });
+  }
+  const users = db.getUsers();
+  const u = users.find((x) => x.id === req.user.id);
+  if (!u) return res.status(404).json({ error: 'Usuario nao encontrado.' });
+  if (!bcrypt.compareSync(String(currentPassword || ''), u.passwordHash)) {
+    return res.status(403).json({ error: 'A senha atual esta incorreta.' });
+  }
+  u.passwordHash = bcrypt.hashSync(String(newPassword), 10);
+  db.saveUsers(users);
+  res.json({ ok: true });
 });
 
 // ====================  ADMIN (DONO / PREMIUM)  ====================
